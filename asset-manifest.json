@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "fish-multisig/static/css/main.4964f32b.chunk.css",
+    "main.js": "fish-multisig/static/js/main.dd6b0e60.chunk.js",
+    "runtime-main.js": "fish-multisig/static/js/runtime-main.b1eff756.js",
+    "static/css/2.fc7386cf.chunk.css": "fish-multisig/static/css/2.fc7386cf.chunk.css",
+    "static/js/2.0569e323.chunk.js": "fish-multisig/static/js/2.0569e323.chunk.js",
+    "static/js/3.b19a2b96.chunk.js": "fish-multisig/static/js/3.b19a2b96.chunk.js",
+    "static/js/4.3f28557e.chunk.js": "fish-multisig/static/js/4.3f28557e.chunk.js",
+    "static/js/5.b90ccbfe.chunk.js": "fish-multisig/static/js/5.b90ccbfe.chunk.js",
+    "static/js/6.194aa9e6.chunk.js": "fish-multisig/static/js/6.194aa9e6.chunk.js",
+    "static/js/7.4306a452.chunk.js": "fish-multisig/static/js/7.4306a452.chunk.js",
+    "index.html": "fish-multisig/index.html",
+    "static/js/2.0569e323.chunk.js.LICENSE.txt": "fish-multisig/static/js/2.0569e323.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b1eff756.js",
+    "static/css/2.fc7386cf.chunk.css",
+    "static/js/2.0569e323.chunk.js",
+    "static/css/main.4964f32b.chunk.css",
+    "static/js/main.dd6b0e60.chunk.js"
+  ]
+}
