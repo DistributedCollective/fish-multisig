@@ -19,7 +19,7 @@ import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
 export function App() {
   return (
-    <BrowserRouter basename={`/${process.env.PUBLIC_URL || ''}`}>
+    <BrowserRouter basename={`${process.env.PUBLIC_URL || ''}`}>
       <Helmet titleTemplate="%s | FISH MultiSig" defaultTitle="FISH MultiSig" />
       <BlockChainProvider>
         <Switch>
