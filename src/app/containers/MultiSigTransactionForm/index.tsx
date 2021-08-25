@@ -5,26 +5,24 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { bignumber } from 'mathjs';
+import { FormGroup, HTMLSelect, InputGroup, Button } from '@blueprintjs/core';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey } from './slice';
-import { selectMultiSigTransactionForm } from './selectors';
 import { multiSigTransactionFormSaga } from './saga';
 import { ISubmitTransactionSignature, TxType } from './types';
-import { FormGroup, HTMLSelect, InputGroup, Button } from '@blueprintjs/core';
 import { SwitchDataForm } from './components/SwitchDataForm';
 import {
   checkAddressChecksum,
   toChecksumAddress,
   toWei,
 } from '../../../utils/helpers';
-import { bignumber } from 'mathjs';
 import { multisign_submitTransaction } from '../BlockChainProvider/requests/multisig';
 import { selectBlockChainProvider } from '../BlockChainProvider/selectors';
 import { ContractName, DestinationOption } from '../BlockChainProvider/types';
 import { destinations } from '../BlockChainProvider/classifiers';
-import { useContractCall } from '../../hooks/useContractCall';
 
 const txTypeOptions = [
   { value: TxType.CUSTOM, label: 'Custom data' },
@@ -39,7 +37,7 @@ export function MultiSigTransactionForm(props: Props) {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: multiSigTransactionFormSaga });
 
-  const { chainId, network, address } = useSelector(selectBlockChainProvider);
+  const { chainId, network } = useSelector(selectBlockChainProvider);
 
   const [form, setForm] = useState<ISubmitTransactionSignature>({
     destination: '',
