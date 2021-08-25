@@ -13,8 +13,10 @@ import { selectMultiSignConfirmTransactionForm } from './selectors';
 import { multiSignConfirmTransactionFormSaga } from './saga';
 import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
 import { multisign_confirmTransaction } from '../BlockChainProvider/requests/multisig';
+import { ContractName } from '../BlockChainProvider/types';
 
 interface Props {
+  contractName: ContractName;
   transactionId: string;
 }
 
@@ -40,13 +42,13 @@ export function MultiSignConfirmTransactionForm(props: Props) {
       event && event.preventDefault && event.preventDefault();
       setIsLoading(true);
       try {
-        await multisign_confirmTransaction(transactionId);
+        await multisign_confirmTransaction(props.contractName, transactionId);
       } catch (e) {
         console.error(e);
       }
       setIsLoading(false);
     },
-    [transactionId],
+    [props.contractName, transactionId],
   );
 
   useEffect(() => {

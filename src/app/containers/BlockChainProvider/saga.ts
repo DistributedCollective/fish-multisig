@@ -65,7 +65,6 @@ function createBlockPollChannel({ interval, web3 }) {
     });
 
     blockTracker.on('block', block => {
-      console.log('got block', Number(block.number));
       emit(actions.blockReceived(block.number));
       emit(actions.processBlock(block));
     });

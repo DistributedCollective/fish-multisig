@@ -11,7 +11,7 @@ export function Header() {
             to="/"
             className="text-white hover:text-white hover:no-underline"
           >
-            Sovryn MultiSig
+            FISH MultiSig
           </Link>
         </div>
         <div className="text-gray-400">

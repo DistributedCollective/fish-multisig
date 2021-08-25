@@ -19,11 +19,8 @@ import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
 export function App() {
   return (
-    <BrowserRouter basename="/multisig-ui">
-      <Helmet
-        titleTemplate="%s | Sovryn MultiSig"
-        defaultTitle="Sovryn MultiSig"
-      />
+    <BrowserRouter basename={`/${process.env.PUBLIC_URL || ''}`}>
+      <Helmet titleTemplate="%s | FISH MultiSig" defaultTitle="FISH MultiSig" />
       <BlockChainProvider>
         <Switch>
           <Route exact path="/" component={HomePage} />

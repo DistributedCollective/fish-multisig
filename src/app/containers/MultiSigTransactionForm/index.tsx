@@ -22,25 +22,24 @@ import {
 import { bignumber } from 'mathjs';
 import { multisign_submitTransaction } from '../BlockChainProvider/requests/multisig';
 import { selectBlockChainProvider } from '../BlockChainProvider/selectors';
-import { DestinationOption } from '../BlockChainProvider/types';
+import { ContractName, DestinationOption } from '../BlockChainProvider/types';
 import { destinations } from '../BlockChainProvider/classifiers';
+import { useContractCall } from '../../hooks/useContractCall';
 
 const txTypeOptions = [
   { value: TxType.CUSTOM, label: 'Custom data' },
   { value: TxType.ERC20_TRANSFER, label: 'Transfer ERC20 Token' },
 ];
 
-interface Props {}
+interface Props {
+  contractName: ContractName;
+}
 
 export function MultiSigTransactionForm(props: Props) {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: multiSigTransactionFormSaga });
 
-  const { chainId, network } = useSelector(selectBlockChainProvider);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const multiSigTransactionForm = useSelector(selectMultiSigTransactionForm);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
+  const { chainId, network, address } = useSelector(selectBlockChainProvider);
 
   const [form, setForm] = useState<ISubmitTransactionSignature>({
     destination: '',
@@ -60,6 +59,7 @@ export function MultiSigTransactionForm(props: Props) {
       setIsLoading(true);
       try {
         await multisign_submitTransaction(
+          props.contractName,
           form.destination,
           toWei(form.value),
           form.data,
@@ -69,7 +69,7 @@ export function MultiSigTransactionForm(props: Props) {
       }
       setIsLoading(false);
     },
-    [form],
+    [props.contractName, form],
   );
 
   const handleInputChange = useCallback(

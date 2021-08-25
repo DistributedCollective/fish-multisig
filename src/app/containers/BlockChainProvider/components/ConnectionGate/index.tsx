@@ -31,7 +31,7 @@ export function ConnectionGate({ connected, connecting, address }: Props) {
               to="/"
               className="text-white hover:text-gray-300 hover:no-underline"
             >
-              Sovryn MultiSig
+              FISH MultiSig
             </Link>
           </div>
         </div>
@@ -42,7 +42,7 @@ export function ConnectionGate({ connected, connecting, address }: Props) {
       >
         <div className="text-center">
           <h2 className="leading-none mb-5">
-            Sovryn MultiSig
+            FISH MultiSig
             <br />
             Interface
           </h2>

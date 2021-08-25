@@ -16,7 +16,7 @@ export function NetworkGate() {
               to="/"
               className="text-white hover:text-gray-300 hover:no-underline"
             >
-              Sovryn MultiSig
+              FISH MultiSig
             </Link>
           </div>
         </div>

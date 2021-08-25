@@ -5,21 +5,22 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { reducer, sliceKey } from './slice';
-import { selectEventContainer } from './selectors';
 import { eventContainerSaga } from './saga';
 import { selectBlockChainProvider } from '../BlockChainProvider/selectors';
 import { network } from '../BlockChainProvider/network';
 import { RowSkeleton } from '../../components/PageSkeleton';
 import { EventData } from 'web3-eth-contract';
 import { LinkToExplorer } from '../../components/LinkToExplorer';
+import { ContractName } from '../BlockChainProvider/types';
 
 const blocksToLook = 5000;
 
 interface Props {
+  contractName: ContractName;
   onSelect: (item: string) => void;
 }
 
@@ -27,11 +28,7 @@ export function EventContainer(props: Props) {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   useInjectSaga({ key: sliceKey, saga: eventContainerSaga });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const eventContainer = useSelector(selectEventContainer);
   const { syncBlockNumber } = useSelector(selectBlockChainProvider);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
   const [events, setEvents] = useState<EventData[]>([]);
@@ -41,7 +38,7 @@ export function EventContainer(props: Props) {
     const get = async () => {
       const block = await network.block();
       const events = await network.getPastEvents(
-        'multiSigWallet',
+        props.contractName,
         'Submission',
         {},
         block - blocksToLook,
@@ -50,7 +47,7 @@ export function EventContainer(props: Props) {
       setLoading(false);
     };
     get().then().catch(console.error);
-  }, [syncBlockNumber]);
+  }, [props.contractName, syncBlockNumber]);
 
   const handleSelect = useCallback(
     (item: string) => {

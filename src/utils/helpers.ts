@@ -8,6 +8,7 @@ import {
 import {
   ChainId,
   ContractName,
+  IContract,
   NetworkName,
 } from '../app/containers/BlockChainProvider/types';
 import { contracts } from '../app/containers/BlockChainProvider/contracts';
@@ -57,7 +58,7 @@ export function prettyTx(
 
 export function getContract(contractName: ContractName) {
   const { network } = store.getState().blockChainProvider;
-  return contracts[network][contractName];
+  return contracts[network][contractName] as IContract;
 }
 
 export const roundToSmaller = (amount: any, decimals: number): string => {

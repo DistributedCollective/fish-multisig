@@ -8,8 +8,6 @@ export const networkTitles = {
 };
 
 export const networks: { [key: number]: NetworkName } = {
-  1: 'eth_mainnet',
-  3: 'eth_ropsten',
   30: 'rsk_mainnet',
   31: 'rsk_testnet',
 };
@@ -36,24 +34,13 @@ export const blockExplorers = {
 };
 
 export const destinations: DestinationContracts = {
-  eth_mainnet: [
-    { value: '0xdac17f958d2ee523a2206206994597c13d831ec7', label: 'USDT' },
-    { value: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', label: 'USDC' },
-    { value: '0x6B175474E89094C44Da98b954EedeAC495271d0F', label: 'DAI' },
-  ],
-  eth_ropsten: [
-    {
-      value: '0x098256E09f04955BCF15d4B7FB018A34bB5C03CB',
-      label: 'Test Token',
-    },
-  ],
   rsk_mainnet: [
-    { value: '0xe700691da7b9851f2f35f8b8182c69c53ccad9db', label: 'DOC' },
-    { value: '0xef213441a85df4d7acbdae0cf78004e1e486bb96', label: 'rUSD' },
+    { value: '0x055A902303746382FBB7D18f6aE0df56eFDc5213', label: 'FISH' },
+    { value: '0xEFc78fc7d48b64958315949279Ba181c2114ABBd', label: 'SOV' },
   ],
   rsk_testnet: [
-    { value: '0xCB46c0ddc60D18eFEB0E586C17Af6ea36452Dae0', label: 'tDOC' },
-    { value: '0x4D5a316D23eBE168d8f887b4447bf8DbFA4901CC', label: 'tUSDT' },
+    { value: '0xaa7038D80521351F243168FefE0352194e3f83C3', label: 'FISH' },
+    { value: '0x6a9A07972D07e58F0daf5122d11E069288A375fb', label: 'SOV' },
   ],
 };
 
