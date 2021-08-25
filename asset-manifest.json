@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/fish-multisig/static/css/main.4964f32b.chunk.css",
-    "main.js": "/fish-multisig/static/js/main.4fff4d66.chunk.js",
+    "main.js": "/fish-multisig/static/js/main.efaa33f8.chunk.js",
     "runtime-main.js": "/fish-multisig/static/js/runtime-main.bb139eb0.js",
     "static/css/2.fc7386cf.chunk.css": "/fish-multisig/static/css/2.fc7386cf.chunk.css",
     "static/js/2.a0a536f5.chunk.js": "/fish-multisig/static/js/2.a0a536f5.chunk.js",
@@ -18,6 +18,6 @@
     "static/css/2.fc7386cf.chunk.css",
     "static/js/2.a0a536f5.chunk.js",
     "static/css/main.4964f32b.chunk.css",
-    "static/js/main.4fff4d66.chunk.js"
+    "static/js/main.efaa33f8.chunk.js"
   ]
 }
