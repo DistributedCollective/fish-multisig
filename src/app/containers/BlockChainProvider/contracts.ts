@@ -1,5 +1,7 @@
 import { IContractNetworks } from './types';
 import MultiSigWallet from './abi/MultiSigWallet.json';
+import OriginsBase from './abi/OriginsBase.json';
+import ERC20Token from './abi/ERC20Token.json';
 
 export const contracts: IContractNetworks = {
   rsk_testnet: {
@@ -15,6 +17,14 @@ export const contracts: IContractNetworks = {
       address: '0x52AD0a0b5Df441009fe1b1Ee83e41D74168928a0',
       abi: MultiSigWallet as any,
     },
+    originsBase: {
+      address: '0xef0CF4969a9c0F55716327a63E05BCF9c7a7b472',
+      abi: OriginsBase as any,
+    },
+    fishToken: {
+      address: '0xaa7038D80521351F243168FefE0352194e3f83C3',
+      abi: ERC20Token as any,
+    },
   },
   rsk_mainnet: {
     multiSigOrigins: {
@@ -28,6 +38,14 @@ export const contracts: IContractNetworks = {
     multiSigDeposit: {
       address: '0xBb4ec577C084A17160F5A016A1a58f51bc6B0609',
       abi: MultiSigWallet as any,
+    },
+    originsBase: {
+      address: '0x9FabDA843C611210d7bA48056B75a1e1884522ef',
+      abi: OriginsBase as any,
+    },
+    fishToken: {
+      address: '0x055A902303746382FBB7D18f6aE0df56eFDc5213',
+      abi: ERC20Token as any,
     },
   },
 };

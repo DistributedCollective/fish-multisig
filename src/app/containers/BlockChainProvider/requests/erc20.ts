@@ -71,3 +71,48 @@ export function er20_transfer_abi_decode(data) {
     return null;
   }
 }
+
+export async function er20_mint_abi(
+  token: string,
+  receiver: string,
+  amount: string,
+) {
+  if (!token) {
+    return '0x';
+  }
+  try {
+    const contract = getTokenContract(token);
+    const decimals = await getTokenDecimals(token, contract);
+    return contract.methods
+      .mint(
+        toChecksumAddress(receiver),
+        bignumber(amount)
+          .mul(10 ** decimals)
+          .toFixed(0),
+      )
+      .encodeABI();
+  } catch (e) {
+    console.error(e);
+    return '0x';
+  }
+}
+
+export function er20_mint_abi_decode(data) {
+  try {
+    const signature = web3.eth.abi.encodeFunctionSignature(
+      'mint(address,uint256)',
+    );
+    const da = data.substr(signature.length);
+    return {
+      signature,
+      data: da,
+      decoded: web3.eth.abi.decodeParameters(
+        ['address', 'uint256'],
+        data.substr(signature.length),
+      ),
+    };
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+}

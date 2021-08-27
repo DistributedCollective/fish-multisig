@@ -10,6 +10,7 @@ export function multisign_submitTransaction(
   data: string,
 ) {
   const account = store.getState().blockChainProvider.address;
+  console.log('submit tx', contractName, destination, value, data);
   return network.send(
     contractName,
     'submitTransaction',

@@ -44,7 +44,7 @@ export function MultiSigTransactionForm(props: Props) {
     value: '',
     data: '0x',
   });
-  const [txType, setTxType] = useState<string>(String(TxType.ERC20_TRANSFER));
+  const [txType, setTxType] = useState<string>(String(TxType.CUSTOM));
   const [isValid, setIsValid] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [destinationOptions, setDestinationOptions] = useState<

@@ -8,6 +8,8 @@ import { selectBlockChainProvider } from '../BlockChainProvider/selectors';
 import type { MSConfig } from './index';
 import { LinkToExplorer } from '../../components/LinkToExplorer';
 import { useContractCall } from '../../hooks/useContractCall';
+import { OriginsBaseTransactionForm } from '../OriginsBaseTransactionForm';
+import { TokenTransactionForm } from '../TokenTransactionForm';
 
 type RowProps = {
   item: MSConfig;
@@ -35,7 +37,15 @@ export const Row: React.FC<RowProps> = ({ item }) => {
       </h3>
       <div className="lg:flex lg:flex-row lg:space-x-4">
         <div className="lg:w-6/12 lg:flex">
-          <MultiSigTransactionForm contractName={item.contractName} />
+          {item.contractName === 'multiSigOrigins' && (
+            <OriginsBaseTransactionForm contractName={item.contractName} />
+          )}
+          {item.contractName === 'multiSigToken' && (
+            <TokenTransactionForm contractName={item.contractName} />
+          )}
+          {!['multiSigOrigins', 'multiSigToken'].includes(
+            item.contractName,
+          ) && <MultiSigTransactionForm contractName={item.contractName} />}
         </div>
         <div className="lg:w-6/12">
           <div className="mt-5 lg:mt-0 lg:flex-grow md:flex md:flex-row md:space-x-4">
