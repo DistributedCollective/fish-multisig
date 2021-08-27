@@ -13,7 +13,7 @@ import Web3 from 'web3';
 import { network } from './network';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ChainId } from './types';
-import { wssNodes } from './classifiers';
+import { rpcNodes } from './classifiers';
 import { walletConnection } from './web3-modal';
 import { selectBlockChainProvider } from './selectors';
 import { TransactionReceipt } from 'web3-core';
@@ -27,7 +27,7 @@ function* setupSaga() {
 function* networkSaga({
   payload,
 }: PayloadAction<{ chainId: ChainId; networkId: number }>) {
-  const nodeUrl = wssNodes[payload.chainId];
+  const nodeUrl = rpcNodes[payload.chainId];
   let web3Provider;
   let isWebsocket = false;
   if (nodeUrl.startsWith('http')) {
@@ -65,7 +65,7 @@ function createBlockPollChannel({ interval, web3 }) {
     });
 
     blockTracker.on('block', block => {
-      emit(actions.blockReceived(block.number));
+      emit(actions.blockReceived(block));
       emit(actions.processBlock(block));
     });
 
@@ -196,6 +196,8 @@ function createBlockChannels({ web3 }) {
   });
 }
 
+// todo: for webscoket connection only
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function* callCreateBlockChannels() {
   const web3 = network.web3;
   const blockChannel = yield call(createBlockChannels, { web3 });
@@ -211,9 +213,8 @@ function* callCreateBlockChannels() {
 }
 
 function* processBlockHeader(event) {
-  const blockNumber = event.payload.number;
+  const blockNumber = Number(event.payload.number);
   const web3 = network.web3;
-
   try {
     const block = yield call(web3.eth.getBlock, blockNumber, true);
     yield call(processBlock, {
@@ -232,9 +233,9 @@ export function* blockChainProviderSaga() {
   yield takeLatest(actions.setup.type, setupSaga);
   yield takeLatest(actions.chainChanged.type, networkSaga);
   yield takeLatest(actions.connected.type, connectedSaga);
-  yield takeLatest(actions.connected.type, callCreateBlockChannels);
+  // yield takeLatest(actions.connected.type, callCreateBlockChannels); // for ws
+  yield takeLatest(actions.connected.type, callCreateBlockPollChannel); // for rpc
   yield takeEvery(actions.blockReceived.type, processBlockHeader);
   yield takeLatest(actions.disconnect.type, disconnectSaga);
-  // yield takeLatest(actions.setupCompleted.type, callCreateBlockPollChannel);
   // yield takeEvery(actions.processBlock.type, processBlock); // when using poll channel
 }

@@ -5,7 +5,7 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core';
+import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
 
 import {
   checkAddressChecksum,

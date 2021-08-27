@@ -15,15 +15,8 @@ export const networks: { [key: number]: NetworkName } = {
 export const rpcNodes = {
   1: 'https://ropsten.infura.io/v3/237d5a5403134af7b7211fd6996c15d3',
   3: 'https://mainnet.infura.io/v3/237d5a5403134af7b7211fd6996c15d3',
-  30: 'https://public-node.rsk.co',
-  31: 'https://public-node.testnet.rsk.co',
-};
-
-export const wssNodes = {
-  1: 'wss://mainnet.infura.io/ws/v3/237d5a5403134af7b7211fd6996c15d3',
-  3: 'wss://ropsten.infura.io/ws/v3/237d5a5403134af7b7211fd6996c15d3',
-  30: 'wss://mainnet.sovryn.app/ws',
-  31: 'wss://testnet.sovryn.app/ws',
+  30: 'https://mainnet.sovryn.app/rpc',
+  31: 'https://testnet.sovryn.app/rpc',
 };
 
 export const blockExplorers = {

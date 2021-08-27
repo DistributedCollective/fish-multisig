@@ -20,7 +20,6 @@ function getOriginContract(address: string) {
 export async function origins_getDepositAddress(address: string) {
   try {
     const contract = getOriginContract(address);
-    console.log(contract, address);
     return await contract.methods.getDepositAddress().call();
   } catch (e) {
     console.error('failed origins_getDepositAddress', e);

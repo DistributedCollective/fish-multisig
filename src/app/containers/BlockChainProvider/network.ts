@@ -143,7 +143,6 @@ class Network {
     return this.contracts[contractName].getPastEvents(eventName, {
       fromBlock,
       toBlock,
-      filter,
     });
   }
 
