@@ -29,6 +29,7 @@ export interface INetworkToContract {
   multiSigOrigins: IContract;
   multiSigToken: IContract;
   multiSigDeposit: IContract;
+  multiSigDevTeam: IContract;
 }
 
 export interface IContract {

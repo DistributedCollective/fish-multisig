@@ -29,5 +29,9 @@ export const contracts: IContractNetworks = {
       address: '0xBb4ec577C084A17160F5A016A1a58f51bc6B0609',
       abi: MultiSigWallet as any,
     },
+    multiSigDevTeam: {
+      address: '0x19FeEA4BC43D3B49911c6A10A9D374a8ab2E5A49',
+      abi: MultiSigWallet as any,
+    },
   },
 };
