@@ -43,6 +43,7 @@ export function EventContainer(props: Props) {
         {},
         block - blocksToLook,
       );
+      console.log(block, block - blocksToLook, events);
       setEvents(events.reverse().slice(0, 3));
       setLoading(false);
     };

@@ -13,7 +13,7 @@ import Web3 from 'web3';
 import { network } from './network';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { ChainId } from './types';
-import { rpcNodes } from './classifiers';
+import { rpcNodes, wsNodes } from './classifiers';
 import { walletConnection } from './web3-modal';
 import { selectBlockChainProvider } from './selectors';
 import { TransactionReceipt } from 'web3-core';
@@ -44,6 +44,15 @@ function* networkSaga({
   const web3 = new Web3(web3Provider);
 
   network.setWeb3(web3, getNetwork(payload.chainId), isWebsocket);
+  network.setWsWeb3(
+    new Web3(
+      new Web3.providers.WebsocketProvider(wsNodes[payload.chainId], {
+        timeout: 5,
+        reconnectDelay: 10,
+      }),
+    ),
+    getNetwork(payload.chainId),
+  );
   yield put(actions.setupCompleted());
 }
 

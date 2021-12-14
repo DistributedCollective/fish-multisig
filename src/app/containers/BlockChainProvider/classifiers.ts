@@ -19,6 +19,13 @@ export const rpcNodes = {
   31: 'https://testnet.sovryn.app/rpc',
 };
 
+export const wsNodes = {
+  1: 'wss://ropsten.infura.io/ws/v3/237d5a5403134af7b7211fd6996c15d3',
+  3: 'wss://mainnet.infura.io/ws/v3/237d5a5403134af7b7211fd6996c15d3',
+  30: 'wss://mainnet.sovryn.app/websocket',
+  31: 'wss://testnet.sovryn.app/ws',
+};
+
 export const blockExplorers = {
   1: 'https://etherscan.io',
   3: 'https://ropsten.etherscan.io',

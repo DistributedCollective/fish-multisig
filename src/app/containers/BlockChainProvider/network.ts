@@ -20,11 +20,14 @@ interface SendTxOptions {
 class Network {
   public web3: Web3 = null as any;
   public writeWeb3: Web3 = null as any;
+  public wsWeb3: Web3 = null as any;
   public contracts: {} = {};
   public writeContracts: {} = {};
+  public wsContracts: {} = {};
 
   private _network: NetworkName = null as any;
   private _writeNetwork: NetworkName = null as any;
+  private _wsNetwork: NetworkName = null as any;
 
   public setWeb3(
     web3: Web3,
@@ -85,6 +88,30 @@ class Network {
     }
   }
 
+  public setWsWeb3(web3: Web3, network: NetworkName) {
+    this.wsWeb3 = web3;
+    if (this._wsNetwork !== network) {
+      this._wsNetwork = network;
+      for (const contractName of Object.keys(
+        contracts[network] as INetworkToContract,
+      )) {
+        const { address, abi } = contracts[network][contractName];
+        this.wsContracts[contractName] = this.makeContract(web3, {
+          address,
+          abi,
+        });
+      }
+    }
+
+    const provider = this.wsWeb3.currentProvider as any;
+
+    provider.on('end', () => {
+      provider.removeAllListeners('end');
+      this.wsContracts = {};
+      this.wsWeb3 = undefined as any;
+    });
+  }
+
   public async nonce(address: string): Promise<number> {
     return this.web3.eth.getTransactionCount(address);
   }
@@ -140,7 +167,11 @@ class Network {
     fromBlock: number = 0,
     toBlock: number | 'latest' = 'latest',
   ): Promise<EventData[]> {
-    return this.contracts[contractName].getPastEvents(eventName, {
+    if (!this.wsContracts[contractName]) {
+      console.log('no events', contractName, eventName, this.wsContracts);
+      return Promise.resolve([]);
+    }
+    return this.wsContracts[contractName].getPastEvents(eventName, {
       fromBlock,
       toBlock,
     });
