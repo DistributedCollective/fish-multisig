@@ -1,11 +1,5 @@
-/**
- *
- * MultiSigTransactionForm
- *
- */
-
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, FormGroup, InputGroup } from '@blueprintjs/core';
+import { Button, FormGroup, HTMLSelect, InputGroup } from '@blueprintjs/core';
 
 import {
   checkAddressChecksum,
@@ -16,7 +10,13 @@ import { ContractName } from '../BlockChainProvider/types';
 import { contracts } from '../BlockChainProvider/contracts';
 import { useSelector } from 'react-redux';
 import { selectBlockChainProvider } from '../BlockChainProvider/selectors';
-import { Erc20MintForm } from './components/Erc20MintForm';
+import { TxType } from '../MultiSigTransactionForm/types';
+import { SwitchDataForm } from '../MultiSigTransactionForm/components/SwitchDataForm';
+
+const txTypeOptions = [
+  { value: TxType.ERC20_TRANSFER, label: 'Transfer ERC20 Token' },
+  { value: TxType.ERC20_MINT, label: 'Mint ERC20 Token' },
+];
 
 interface Props {
   contractName: ContractName;
@@ -29,6 +29,7 @@ export const TokenTransactionForm: React.FC<Props> = props => {
     value: '0',
     data: '0x',
   });
+  const [txType, setTxType] = useState<string>(String(TxType.ERC20_TRANSFER));
   const [isValid, setIsValid] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -95,8 +96,14 @@ export const TokenTransactionForm: React.FC<Props> = props => {
           </div>
         </div>
 
-        <Erc20MintForm
+        {/* <Erc20MintForm
           value={form}
+          onData={data => setForm(prevState => ({ ...prevState, data }))}
+        /> */}
+
+        <SwitchDataForm
+          value={form}
+          type={txType}
           onData={data => setForm(prevState => ({ ...prevState, data }))}
         />
 
@@ -104,13 +111,20 @@ export const TokenTransactionForm: React.FC<Props> = props => {
           {form.data}
         </div>
 
-        <Button
-          type="submit"
-          icon={'send-to'}
-          text="Submit Transaction"
-          disabled={!isValid || isLoading}
-          loading={isLoading}
-        />
+        <div className="flex justify-between space-x items-center">
+          <HTMLSelect
+            options={txTypeOptions}
+            value={txType}
+            onChange={e => setTxType(e.currentTarget.value)}
+          />
+          <Button
+            type="submit"
+            icon={'send-to'}
+            text="Submit Transaction"
+            disabled={!isValid || isLoading}
+            loading={isLoading}
+          />
+        </div>
       </form>
     </div>
   );

@@ -6,6 +6,7 @@ export type ContainerState = MultiSigTransactionFormState;
 export enum TxType {
   CUSTOM,
   ERC20_TRANSFER,
+  ERC20_MINT,
 }
 
 export interface ISubmitTransactionSignature {
