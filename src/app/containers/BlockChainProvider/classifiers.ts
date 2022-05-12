@@ -23,7 +23,7 @@ export const wsNodes = {
   1: 'wss://ropsten.infura.io/ws/v3/237d5a5403134af7b7211fd6996c15d3',
   3: 'wss://mainnet.infura.io/ws/v3/237d5a5403134af7b7211fd6996c15d3',
   30: 'wss://mainnet.sovryn.app/websocket',
-  31: 'wss://testnet.sovryn.app/ws',
+  31: 'wss://testnet.sovryn.app/websocket',
 };
 
 export const blockExplorers = {
